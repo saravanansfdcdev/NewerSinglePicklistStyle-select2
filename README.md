@@ -1,0 +1,2 @@
+# NewerSinglePicklistStyle-select2
+NewerSinglePicklistStyle
