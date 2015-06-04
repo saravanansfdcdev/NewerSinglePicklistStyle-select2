@@ -1,0 +1,106 @@
+<!--
+The MIT License (MIT)
+
+Copyright (c) 2015, Sarv (aka) Saravanan - https://sarvforce.wordpress.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+
+<apex:page contentType="text/javascript" >
+         
+        
+       console.log(" *** LOAD SELECT2 FILES *** "); 
+       var scripts = document.getElementsByTagName('script');
+       loadScript("//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js",donothing);
+       loadScript("//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js",main);
+        
+        
+       
+       function loadScript(sScriptSrc, oCallback) {
+            var oHead = document.getElementsByTagName('head')[0];
+            var oScript = document.createElement('script');
+            oScript.type = 'text/javascript';
+            oScript.src = sScriptSrc;
+            oScript.async = false;
+            oScript.onload = oCallback;
+            oScript.onreadystatechange = function() {
+                if (this.readyState == 'complete') {
+                    oCallback();
+                }
+            }
+            oHead.appendChild(oScript);
+        }
+        
+        function donothing() {
+        
+        }
+        
+        /*** MAIN FUNCTION ****/
+                    
+        function main() {
+
+          $j = jQuery.noConflict();
+          
+          $j(document).ready(function(){
+                       
+              console.log(" *** jQuery SELECT2 STARTS *** "); 
+              
+              $j.when(
+                  
+                     
+                    $j("<link/>", {
+                       rel: "stylesheet",
+                       type: "text/css",
+                       href: "//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"
+                    }).appendTo("head"),
+                    
+
+                    $j.Deferred(function( deferred ){
+                        $j( deferred.resolve );
+                    })
+                ).done(function(){
+                    
+                     
+                      console.log(" *** READY TO LOAD SELECT2 FILES *** "); 
+                   
+                    
+                    $j("select").each(function(){
+                    
+                        var selectfieldid =  $j(this).attr("id") ;
+                        var selectfieldclass =  $j(this).attr("multiple")
+                        
+                        if ( selectfieldclass !== 'multiple' ){
+                            $j(this).select2({
+                            //    theme: "classic"
+                           
+                            });
+                        }  
+                        
+                      
+                         
+                      });
+                          
+                });
+          
+          });
+        
+        }
+                    
+   
+</apex:page>
